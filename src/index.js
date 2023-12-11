@@ -1,5 +1,6 @@
 let express = require("express");
-let { port } = require("./src/config/serverConfig");
+let { port } = require("./config/serverConfig");
+let Cityrepo = require("./repository/city_rep");
 let app = express();
 
 let mainsetUpFuntion = async () => {
@@ -9,6 +10,9 @@ let mainsetUpFuntion = async () => {
   });
 
   app.listen(port, (req, res) => {
+    let city = new Cityrepo();
+    city.createCity({ name: "kotdwara" });
+    // city.DeleteCity({ cityID: 1 });
     console.log("port connected successfull in", port);
   });
 };
