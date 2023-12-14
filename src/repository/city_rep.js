@@ -1,4 +1,5 @@
-const { City } = require("../models/index");
+const { Op, where } = require("sequelize");
+const { City, Airport } = require("../models/index");
 
 class CityRepo {
   async createCity({ name }) {
@@ -46,6 +47,59 @@ class CityRepo {
         });
     } catch (error) {
       throw err;
+    }
+  }
+
+  async getall(filter) {
+    try {
+      if (filter.name) {
+        let city = await City.findAll({
+          where: {
+            name: {
+              [Op.startsWith]: filter.name,
+            },
+          },
+        });
+        return city;
+      }
+      const city = await City.findAll();
+      return city;
+    } catch (err) {
+      console.log("something went wrong with getall");
+      throw new { err }();
+    }
+  }
+
+  async createMulti(data) {
+    try {
+      let cities = await City.bulkCreate(data);
+      return cities;
+    } catch (err) {
+      console.log("some error found while inserting bulk data");
+      throw err;
+    }
+  }
+
+  async getallcityairports(filter) {
+    try {
+      console.log(filter, "my-filter");
+
+      if (filter) {
+        console.log("hyy");
+        const city = await City.findAll({
+          include: Airport,
+          where: {
+            id: filter,
+          },
+        });
+        return city;
+      }
+      
+      const city = await City.findAll({ include: Airport });
+      return city;
+    } catch (err) {
+      console.log("something went wrong with getall");
+      throw new { err }();
     }
   }
 }

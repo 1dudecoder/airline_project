@@ -28,7 +28,6 @@ class CityServices {
   async getCity(cityID) {
     try {
       const city = await this.cityRepo.getCity(cityID);
-      console.log(city, "mycity");
       return city;
     } catch (err) {
       console.log("something went wrong with getCity");
@@ -42,6 +41,36 @@ class CityServices {
       return response;
     } catch (err) {
       console.log("something went wrong at services UpdateCity", err.message);
+      throw { err };
+    }
+  }
+
+  async getall(params) {
+    try {
+      let cities = await this.cityRepo.getall(params);
+      return cities;
+    } catch (err) {
+      console.log("something went wrong at services UpdateCity", err.message);
+      throw { err };
+    }
+  }
+
+  async getallcityairports(params) {
+    try {
+      let cities = await this.cityRepo.getallcityairports(params);
+      return cities;
+    } catch (err) {
+      console.log("something went wrong at services UpdateCity", err.message);
+      throw { err };
+    }
+  }
+
+  async multiCreate(data) {
+    try {
+      let cities = await this.cityRepo.createMulti(data);
+      return cities;
+    } catch (err) {
+      console.log("something went wrong at services multicreate", err.message);
       throw { err };
     }
   }

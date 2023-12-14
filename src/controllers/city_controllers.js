@@ -82,9 +82,72 @@ const update = async (req, res) => {
   }
 };
 
+//get all cities
+const getall = async (req, res) => {
+  try {
+    let city = await city_services.getall(req.query);
+    return res.status(200).json({
+      data: city,
+      success: true,
+      message: "all city fetch successfully",
+      err: {},
+    });
+  } catch (err) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "not able to get all city",
+      err: err,
+    });
+  }
+};
+
+//create multiple cities
+const multiCreate = async (req, res) => {
+  try {
+    let cities = await city_services.multiCreate(req.body);
+    return res.status(200).json({
+      data: cities,
+      success: true,
+      message: "cities inserted successfully",
+      err: {},
+    });
+  } catch (err) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "not able to inserted all city",
+      err: err,
+    });
+  }
+};
+
+//get all cities
+const getallcityairports = async (req, res) => {
+  try {
+    let city = await city_services.getallcityairports(req.params.id);
+    return res.status(200).json({
+      data: city,
+      success: true,
+      message: "all city fetch successfully",
+      err: {},
+    });
+  } catch (err) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "not able to get all city",
+      err: err,
+    });
+  }
+};
+
 module.exports = {
   create,
   update,
   distroy,
   get,
+  getall,
+  multiCreate,
+  getallcityairports,
 };
