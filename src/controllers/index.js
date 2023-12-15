@@ -5,7 +5,7 @@ let {
   get,
   getall,
   multiCreate,
-  getallcityairports
+  getallcityairports,
 } = require("./city_controllers");
 
 let {
@@ -17,6 +17,15 @@ let {
   updateCityAirport,
 } = require("./Airport_controller");
 
+let {
+  createplain,
+  createBulkPlain,
+  deleteplain,
+  getallPlain,
+  getplain,
+  updatePlain,
+} = require("./Airplain_controller");
+
 module.exports = {
   create,
   update,
@@ -25,6 +34,7 @@ module.exports = {
   getall,
   multiCreate,
   getallcityairports,
+
   airportfun: {
     createAirport,
     createManyAirport,
@@ -32,5 +42,13 @@ module.exports = {
     getAllAirports,
     deleteAirport,
     updateCityAirport,
+  },
+  airplainfun: {
+    createplain,
+    createBulkPlain,
+    deleteplain,
+    getallPlain,
+    getplain,
+    updatePlain,
   },
 };
